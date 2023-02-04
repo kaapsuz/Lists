@@ -44,7 +44,8 @@ double stolGrunt2Pion(
   print("Długość stołu to: $dlStolu");
   print('Długość podpór = ${iloscPodpor * rozstawPodpor}');
 
-  for (int value in listaDlugosciProfili) {
+  final index = listaDlugosciProfili.indexOf(value);
+  if (dlugoscPodpor <= listaDlugosciProfili[index]) {
     if (dlugoscPodpor <= listaDlugosciProfili[value]) {
       nowaListaDlugosciProfili.add(value);
     } else
