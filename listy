@@ -1,0 +1,66 @@
+void main() {
+
+  //Funkcje Obliczanie długości profili
+  var dlugoscStolu = stolGrunt2Pion(
+      dlPanela: 230,
+      szPanela: 113.4,
+      rozstawPodpor: 200,
+      szczelina: 2,
+      ileKolumnPV: 9,
+      ileWierszyPV: 3);
+  print('Długość Profili : $dlugoscStolu mm');
+
+  print('Długość stołu obliczona z funkcji = $dlugoscStolu');
+  print(nowaListaDlugosciProfili);
+
+}
+
+
+double dlugoscPanela = 230.0;
+double szerokoscPanela = 113.40;
+double rozstawPodpor = 200;
+double margines = 50.0;
+double profil_220 = 220;
+double profil_330 = 330;
+double profil_440 = 440;
+double odstepMiedzyPanelami = 2;
+List<double> dostepneProfile = [220.0, 330.0, 440.0];
+
+var listaDlugosciProfili = [440, 330, 220];
+var nowaListaDlugosciProfili = [];
+
+double stolGrunt2Pion(
+    {required double dlPanela,
+    required double szPanela,
+    required double rozstawPodpor,
+    required int szczelina,
+    required int ileKolumnPV,
+    required int ileWierszyPV}) {
+  double dlStolu = szPanela * ileKolumnPV + (ileKolumnPV - 1) * 2 + 12;
+  int iloscPodpor = dlStolu ~/ rozstawPodpor;
+  double dlugoscPodpor = iloscPodpor * rozstawPodpor;
+
+  print('Ilość podpór :  $iloscPodpor');
+  print("Długość stołu to: $dlStolu");
+  print('Długość podpór = ${iloscPodpor * rozstawPodpor}');
+
+  for (int value in listaDlugosciProfili) {
+    if (dlugoscPodpor <= listaDlugosciProfili[value]) {
+      nowaListaDlugosciProfili.add(value);
+    } else
+      print('Nie można obliczyć podpory');
+  }
+  return dlStolu;
+}
+
+//void Function(int) dodajDoListy = (danaWejsciowa) => nowaListaDlugosciProfili.add(danaWejsciowa * 2);
+void dodajDoListy(danaWejsciowa) {
+  nowaListaDlugosciProfili.add(danaWejsciowa);
+}
+
+// Generic function - funkcja przyjmująca kazdy typ zmiennej.
+void operacjaNaProfilach<T>(List<T> daneWejsciowe, void Function(T) akcja) {
+  for (var item in daneWejsciowe) {
+    akcja(item);
+  }
+}
